@@ -18,6 +18,5 @@ set undofile
 set termguicolors
 set scrolloff=8
 set noshowmode
-set completeopt=menuone,noinsert,noselect
 set colorcolumn=80
 set signcolumn=yes
