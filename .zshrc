@@ -100,7 +100,7 @@ export c="/mnt/c/Users/JiseungJung"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias open="cmd.exe /C "
+alias open="wslview"
 alias nv="nvim"
 alias vim="nvim"
 alias ni="nvim"
@@ -111,5 +111,15 @@ if [[ $PWD == $c ]]; then
     cd $HOME
 fi
 
+# Run tmux by default
+if command -v tmux &> /dev/null && [ -n "$PS1"  ] && \
+   [[ ! "$TERM" =~ screen  ]] && [[ ! "$TERM" =~ tmux  ]] && \
+   [ -z "$TMUX"  ]; then
+      exec tmux
+fi
+
+# This loads nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+
+source ~/.profile
