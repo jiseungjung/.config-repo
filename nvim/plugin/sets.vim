@@ -20,4 +20,3 @@ set scrolloff=8
 set noshowmode
 set colorcolumn=80
 set signcolumn=yes
-set paste
