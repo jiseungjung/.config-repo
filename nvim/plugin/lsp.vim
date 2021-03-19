@@ -1,4 +1,3 @@
-lua require'lspconfig'.tsserver.setup{}
 lua require("lsp")
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
