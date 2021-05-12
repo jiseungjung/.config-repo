@@ -111,13 +111,6 @@ if [[ $PWD == $c ]]; then
     cd $HOME
 fi
 
-# Run tmux by default
-if command -v tmux &> /dev/null && [ -n "$PS1"  ] && \
-   [[ ! "$TERM" =~ screen  ]] && [[ ! "$TERM" =~ tmux  ]] && \
-   [ -z "$TMUX"  ]; then
-      exec tmux
-fi
-
 # This loads nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
