@@ -105,6 +105,7 @@ alias nv="nvim"
 alias vim="nvim"
 alias ni="nvim"
 alias v="nvim"
+alias tree="tree -I node_modules"
 
 # Change start directory to HOME
 if [[ $PWD == $c ]]; then
