@@ -1,2 +1,3 @@
 colorscheme gruvbox
-highlight Normal guibg=none
+hi Normal guibg=none
+hi Visual guibg=#b89c9e gui=none
