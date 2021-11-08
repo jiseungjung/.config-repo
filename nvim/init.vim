@@ -9,3 +9,5 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
 
 call plug#end()
+
+let mapleader=" "

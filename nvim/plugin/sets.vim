@@ -12,7 +12,8 @@ set nowrap
 set smartcase
 set ignorecase
 set noswapfile
-set backupcopy=yes
+set nobackup
+set nowritebackup
 set undodir=~/.vim/undodir
 set undofile
 set termguicolors
