@@ -12,7 +12,7 @@ endfunction
 
 au BufRead,BufNewFile *.inc,*.ihtml,*.html,*.tpl,*.class | let Comment="<!-- " | let EndComment=" -->"
 au BufRead,BufNewFile *.sh,*.pl,*.tcl let Comment="#" | let EndComment=""
-au BufRead,BufNewFile *.js,*.cc,*.php,*.cxx let Comment="\/\/" | let EndComment=""
+au BufRead,BufNewFile *.js,*.cc,*.php,*.cxx let Comment="\/\/ " | let EndComment=""
 au BufRead,BufNewFile *.c,*.h,*.css,*.scss let Comment="\/\*" | let EndComment="\*\/"
 
 "function! Comment()
