@@ -70,7 +70,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    vi-mode
+    zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,6 +110,10 @@ alias vim="nvim"
 alias ni="nvim"
 alias v="nvim"
 alias tree="tree -I node_modules"
+
+# Key bindings
+bindkey '^I' autosuggest-accept
+bindkey '^ ' expand-or-complete
 
 # Change start directory to HOME
 if [[ $PWD == $c ]]; then
