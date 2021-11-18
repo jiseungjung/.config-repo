@@ -4,7 +4,14 @@ mkdir -p ~/.config/nvim/after/plugin
 mkdir -p ~/.config/nvim/lua
 
 # link wholesale
-for f in `find . -regex ".*\.vim$\|.*\.lua$\|.*\.json$"`; do
-    rm -rf ~/.config/nvim/$f
-    ln -s ~/config-repo/nvim/$f ~/.config/nvim/$f
-done
+if [[ "$OSTYPE" == "linux"* ]]; then
+    for f in `find . -regex ".*\.(vim|lua|json)"`; do
+        rm -rf ~/.config/nvim/$f
+        ln -s ~/.config-repo/nvim/$f ~/.config/nvim/$f
+    done
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	for f in `find -E . -regex ".*\.(vim|lua|json)"`; do
+        rm -rf ~/.config/nvim/$f
+        ln -s ~/.config-repo/nvim/$f ~/.config/nvim/$f
+    done
+fi
