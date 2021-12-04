@@ -4,3 +4,6 @@ inoremap <C-v> :r ~/.vimbuffer<CR>
 
 " find highlighted
 vnoremap <C-f> y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" source init.vim
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
