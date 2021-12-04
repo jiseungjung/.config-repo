@@ -5,12 +5,12 @@ mkdir -p ~/.config/nvim/lua
 
 # link wholesale
 if [[ "$OSTYPE" == "linux"* ]]; then
-    for f in `find . -regex ".*\.(vim|lua|json)"`; do
+    for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
         rm -rf ~/.config/nvim/$f
         ln -s ~/.config-repo/nvim/$f ~/.config/nvim/$f
     done
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	for f in `find -E . -regex ".*\.(vim|lua|json)"`; do
+    for f in `find -E . -regex ".*\.(vim|lua|json)"`; do
         rm -rf ~/.config/nvim/$f
         ln -s ~/.config-repo/nvim/$f ~/.config/nvim/$f
     done
