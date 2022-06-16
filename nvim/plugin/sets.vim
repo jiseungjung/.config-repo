@@ -22,4 +22,4 @@ set noshowmode
 set colorcolumn=80
 set signcolumn=yes
 set pastetoggle=<F2>
-set clipboard=unnamed
+set clipboard=unnamed,unnamedplus
