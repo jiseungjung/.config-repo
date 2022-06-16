@@ -104,12 +104,6 @@ export c="/mnt/c/Users/JiseungJung"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias open="wslview"
-alias nv="nvim"
-alias vim="nvim"
-alias ni="nvim"
-alias v="nvim"
-alias tree="tree -I node_modules"
 
 # Key bindings
 bindkey '^I' autosuggest-accept
@@ -125,3 +119,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
 
 source ~/.profile
+source ~/.zsh_aliases

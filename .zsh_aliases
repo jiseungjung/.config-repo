@@ -1,0 +1,55 @@
+# WSL
+# alias open="wslview"
+
+# nvim
+alias nv="nvim"
+alias vim="nvim"
+alias ni="nvim"
+alias v="nvim"
+
+# Node
+alias tree="tree -I node_modules"
+
+# Git
+alias gps="git push"
+alias gpl="git pull"
+alias greset="git reset --hard"
+
+# Diva
+alias d="diva docker-compose"
+alias dr="diva docker-compose run --rm"
+
+alias dsr="diva docker-compose run --rm store bundle exec rubocop -a"
+alias dsf="diva docker-compose run --rm store yarn format && diva docker-compose run --rm store yarn lint --quiet"
+alias dsflow="diva docker-compose run --rm store yarn flow"
+alias dst="diva docker-compose run --rm store bundle exec rspec"
+alias dstjs="diva docker-compose run --rm store yarn test"
+alias dsrc="diva docker-compose run --rm store bundle exec rails console"
+alias dslogs="diva docker logs --tail=500 -f diva_store_1 | ~/PrintBear/Tools/rails-logparser"
+alias dsup="diva docker-compose up -d store artisan store-bridge home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend"
+
+alias dlint="docker-compose run re-store-tools eslint --ext js,ts,tsx"
+alias lint="eslint --ext js,ts,tsx"
+
+alias dbb="diva ./diva bb"
+alias dgpl="diva ./diva git pull"
+alias dpsql="diva ./diva postgres"
+
+# Studio
+alias cds="cd ~/PrintBear/diva/re-store/islands/studio/frontend"
+# Docker
+ alias dc="docker-compose"
+
+# Functions
+function diva() {
+  ( cd ~/PrintBear/diva && $* )
+}
+
+function gitrehash() {
+  chmod +x README.md
+  git add README.md
+  git commit --amend --no-edit
+  chmod -x README.md
+  git add README.md
+  git commit --amend --no-edit
+}
