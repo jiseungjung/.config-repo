@@ -1,6 +1,5 @@
 {
-    "prettier.tabWidth": 4,
-    "prettier.singleQuote": true,
+    "prettier.tabWidth": 2,
     "prettier.semi": false,
     "prettier.arrowParens": "avoid",
     "prettier.eslintIntegration": true,

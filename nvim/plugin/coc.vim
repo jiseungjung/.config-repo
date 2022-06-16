@@ -56,7 +56,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Auto format on save
 autocmd BufWritePre *.py,*.html :Format
-autocmd BufWritePre *.js,*.css,*scss :Prettier
+autocmd BufWritePre *.js,*tsx,*.css,*scss :Prettier
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
