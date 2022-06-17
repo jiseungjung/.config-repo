@@ -1,8 +1,3 @@
 {
-    "prettier.tabWidth": 2,
-    "prettier.semi": false,
-    "prettier.arrowParens": "avoid",
-    "prettier.eslintIntegration": true,
-    "prettier.printWidth": 100,
-    "prettier.formatterPriority" : -1
+  "eslint.autoFixOnSave": true
 }

@@ -54,9 +54,13 @@ command! -nargs=0 Format :call CocAction('format')
 " Add `:Prettier` command to format current buffer with prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+" Add `:eslint` command to format current buffer with eslint
+command! -nargs=0 Eslint :CocCommand eslint.executeAutofix
+
 " Auto format on save
 autocmd BufWritePre *.py,*.html :Format
-autocmd BufWritePre *.js,*tsx,*.css,*scss :Prettier
+autocmd BufWritePre *.css,*scss :Prettier
+autocmd BufWritePre *.js,*ts,*tsx :Eslint
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
