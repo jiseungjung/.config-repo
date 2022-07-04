@@ -15,4 +15,4 @@ call plug#end()
 
 let mapleader=" "
 
-lua require('treesitter')
+lua require('jiseung')
