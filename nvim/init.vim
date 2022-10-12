@@ -10,6 +10,7 @@ Plug 'mattn/emmet-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'ThePrimeagen/harpoon'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
