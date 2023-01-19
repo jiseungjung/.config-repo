@@ -11,6 +11,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'ThePrimeagen/harpoon'
 Plug 'github/copilot.vim'
+Plug 'mbbill/undotree'
 
 call plug#end()
 
