@@ -12,6 +12,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'ThePrimeagen/harpoon'
 Plug 'github/copilot.vim'
 Plug 'mbbill/undotree'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
