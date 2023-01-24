@@ -4,7 +4,7 @@ require'nvim-treesitter.configs'.setup {
   auto_install = true,
   highlight = {
     enable = true,
-    disable = { "" },
+    disable = { "gitcommit" },
     additional_vim_regex_highlighting = false,
   },
   playground = {

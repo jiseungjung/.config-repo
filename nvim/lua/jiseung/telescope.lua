@@ -1,7 +1,7 @@
 local builtin = require('telescope.builtin')
 
 -- Fallback to find_files if git_files can't find a .git directory
-project_files = function()
+local project_files = function()
   vim.fn.system('git rev-parse --is-inside-work-tree')
   if vim.v.shell_error == 0 then
     require"telescope.builtin".git_files()
