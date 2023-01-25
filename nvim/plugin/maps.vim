@@ -4,3 +4,13 @@
 
 " source init.vim
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+
+nnoremap <silent> <Leader>q :call ToggleQuickFix()<cr>
