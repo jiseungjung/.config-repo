@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'morhetz/gruvbox'
+Plug 'folke/tokyonight.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
