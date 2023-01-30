@@ -14,3 +14,4 @@ function! ToggleQuickFix()
 endfunction
 
 nnoremap <silent> <Leader>q :call ToggleQuickFix()<cr>
+nnoremap <silent> <Esc> :cclose<cr>
