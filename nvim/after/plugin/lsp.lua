@@ -7,6 +7,40 @@ lsp.ensure_installed({
   'sumneko_lua',
 })
 
+
+local function filter(arr, fn)
+  if type(arr) ~= "table" then
+    return arr
+  end
+
+  local filtered = {}
+  for k, v in pairs(arr) do
+    if fn(v, k, arr) then
+      table.insert(filtered, v)
+    end
+  end
+
+  return filtered
+end
+
+local function filterReactDTS(value)
+  return string.match(value.targetUri, 'react/index.d.ts') == nil
+end
+
+-- Fix multiple definitions for react
+lsp.configure('tsserver', {
+  handlers = {
+    ['textDocument/definition'] = function(err, result, method, ...)
+      if vim.tbl_islist(result) and #result > 1 then
+        local filtered_result = filter(result, filterReactDTS)
+        return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+      end
+
+      vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
+    end
+  }
+})
+
 -- Fix Undefined global 'vim'
 lsp.configure('sumneko_lua', {
   settings = {
@@ -36,9 +70,6 @@ lsp.setup_nvim_cmp({
 
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
-
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<C-j>", function() vim.diagnostic.goto_next() end, opts)
   vim.keymap.set("n", "<C-k>", function() vim.diagnostic.goto_prev() end, opts)
 end)
