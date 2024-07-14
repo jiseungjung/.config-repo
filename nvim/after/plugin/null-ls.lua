@@ -48,7 +48,10 @@ null_ls.setup({
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
-                    async_formatting(bufnr)
+                    local file_path = vim.api.nvim_buf_get_name(bufnr)
+                    if not file_path:match("re%-store/shared/crayon") then
+                      async_formatting(bufnr)
+                    end
                 end,
             })
         end
