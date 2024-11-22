@@ -1,4 +1,10 @@
+local null_ls = require("null-ls")
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local timeout_ms = 5000
+local excluded_paths = {
+    "re%-store/shared/crayon",
+    "re%-store/islands/xstudio/backend",
+}
 
 local async_formatting = function(bufnr)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
@@ -35,34 +41,31 @@ local async_formatting = function(bufnr)
     )
 end
 
-local null_ls = require("null-ls")
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 null_ls.setup({
   sources = {
-    null_ls.builtins.code_actions.eslint,
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.formatting.eslint
+      null_ls.builtins.code_actions.eslint,
+      null_ls.builtins.diagnostics.eslint,
+      null_ls.builtins.formatting.eslint
   },
   on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePost", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    local file_path = vim.api.nvim_buf_get_name(bufnr)
-                    if not file_path:match("re%-store/shared/crayon") then
-                      async_formatting(bufnr)
-                    end
-                end,
-            })
+      if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+          vim.api.nvim_create_autocmd("BufWritePost", {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                  local file_path = vim.api.nvim_buf_get_name(bufnr)
+                  for _, pattern in ipairs(excluded_paths) do
+                      if file_path:match(pattern) then return end
+                  end
+                  async_formatting(bufnr)
+              end
+          })
         end
-    end,
+  end
 })
 
 vim.keymap.set("n", "<leader>c", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format({ timeout_ms })
+    vim.lsp.buf.format({ timeout_ms })
 end)
