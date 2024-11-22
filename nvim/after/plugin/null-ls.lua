@@ -8,6 +8,11 @@ local async_formatting = function(bufnr)
         "textDocument/formatting",
         vim.lsp.util.make_formatting_params({ timeout_ms }),
         function(err, res, ctx)
+            local client = vim.lsp.get_client_by_id(ctx.client_id)
+            if client and client.name ~= "null-ls" then
+                return -- Ignore responses from non-null-ls clients
+            end
+
             if err then
                 local err_msg = type(err) == "string" and err or err.message
                 -- you can modify the log message / level (or ignore it completely)
@@ -21,7 +26,6 @@ local async_formatting = function(bufnr)
             end
 
             if res then
-                local client = vim.lsp.get_client_by_id(ctx.client_id)
                 vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-16")
                 vim.api.nvim_buf_call(bufnr, function()
                     vim.cmd("silent noautocmd update")
