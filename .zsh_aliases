@@ -11,23 +11,33 @@ alias tree="tree -I node_modules"
 alias gps="git push"
 alias gpl="git pull"
 alias greset="git reset --hard"
-
-# Docker
-alias dc="docker-compose"
+alias gd="git diff"
+alias gdi="git diff --ignore-all-space"
+alias gca="git commit -a"
 
 # Diva
-alias d="diva docker-compose"
+alias dc="diva docker-compose"
 alias dr="diva docker-compose run --rm"
 
+alias cdd="cd ~/PrintBear/diva"
 alias cdrs="cd ~/PrintBear/diva/re-store"
-alias cds="cd ~/PrintBear/diva/re-store/islands/studio/frontend"
+alias cds="cd ~/PrintBear/diva/re-store/islands/studio"
+alias cdx="cd ~/PrintBear/diva/re-store/islands/xstudio"
+alias cdc="cd ~/PrintBear/diva/re-store/islands/core"
+alias cdcn="cd ~/PrintBear/diva/re-store/shared/crayon"
 
-alias dsup="diva docker-compose up -d store artisan store-bridge home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend"
+alias dsup="diva docker-compose up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
+alias dsupl="diva docker-compose up store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
+alias dtup="diva docker-compose up -d ai-endpoint-trace-inspyrenet trace ai-endpoint-nsfw-detector nsfw-detector flag"
 
-alias lint="eslint --ext js,ts,tsx"
-alias dlint="docker-compose run re-store-tools eslint --ext js,ts,tsx"
-alias dtsc="docker-compose run --rm studio-frontend yarn tsc"
-alias dtest="diva docker-compose run --rm studio-frontend yarn test"
+alias lint="git diff --name-only --diff-filter=ACM | grep '\.js\|\.jsx\|\.ts\|\.tsx$' | xargs -I {} sh -c 'cd \$(git rev-parse --show-toplevel) && eslint --fix --quiet \"{}\"'"
+alias tlint="re-store eslint --config=./.i18n.eslintrc.js --no-eslintrc --ext=json shared/i18n/translations islands/studio/frontend/i18n/translations --fix"
+alias dlints="diva docker-compose run re-store-tools eslint --ext js,ts,tsx --fix --rule 'import/no-extraneous-dependencies: off' --rule '@typescript-eslint/no-floating-promises: off' islands/studio/frontend"
+alias dlintb="diva docker-compose run re-store-tools eslint --ext js,ts,tsx --fix --rule 'import/no-extraneous-dependencies: off' islands/studio/backend"
+alias dtsc="diva docker-compose run --rm xstudio-frontend yarn tsc"
+alias dtscb="diva docker-compose run --rm xstudio-backend yarn tsc"
+alias dtest="diva docker-compose run --rm xstudio-frontend yarn test"
+alias dtestb="diva docker-compose run --rm xstudio-backend yarn test"
 
 alias dbb="diva ./diva bb"
 alias dgpl="diva ./diva git pull"
@@ -36,6 +46,10 @@ alias dpsql="diva ./diva postgres"
 # Functions
 function diva() {
   ( cd ~/PrintBear/diva && $* )
+}
+
+function re-store() {
+  ( cd ~/PrintBear/diva/re-store && $* )
 }
 
 function gitrehash() {
