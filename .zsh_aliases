@@ -1,3 +1,7 @@
+# Backlight control
+alias blon="sudo brightnessctl --device=intel_backlight s 100%"
+alias bloff="sudo brightnessctl --device=intel_backlight s 0"
+
 # nvim
 alias nv="nvim"
 alias vim="nvim"
@@ -21,22 +25,24 @@ alias dr="diva docker-compose run --rm"
 
 alias cdd="cd ~/PrintBear/diva"
 alias cdrs="cd ~/PrintBear/diva/re-store"
-alias cds="cd ~/PrintBear/diva/re-store/islands/studio"
-alias cdx="cd ~/PrintBear/diva/re-store/islands/xstudio"
+alias cds="cd ~/PrintBear/diva/re-store/islands/studio/frontend"
+alias cdsb="cd ~/PrintBear/diva/re-store/islands/studio/backend"
+alias cdx="cd ~/PrintBear/diva/re-store/islands/xstudio/frontend"
+alias cdxb="cd ~/PrintBear/diva/re-store/islands/xstudio/backend"
 alias cdc="cd ~/PrintBear/diva/re-store/islands/core"
 alias cdcn="cd ~/PrintBear/diva/re-store/shared/crayon"
 
 alias dsup="diva docker-compose up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
-alias dsupl="diva docker-compose up store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
+alias dsupl="diva docker-compose up -d artisan delorean core-frontend core-backend internal-auth-frontend studio-frontend studio-backend flag && diva docker-compose up xstudio-frontend xstudio-backend bridge-backend store"
 alias dtup="diva docker-compose up -d ai-endpoint-trace-inspyrenet trace ai-endpoint-nsfw-detector nsfw-detector flag"
 
-alias lint="git diff --name-only --diff-filter=ACM | grep '\.js\|\.jsx\|\.ts\|\.tsx$' | xargs -I {} sh -c 'cd \$(git rev-parse --show-toplevel) && eslint --fix --quiet \"{}\"'"
+alias gitlint="git diff --name-only --diff-filter=ACM | grep '\.js\|\.jsx\|\.ts\|\.tsx$' | xargs -I {} sh -c 'cd \$(git rev-parse --show-toplevel) && eslint --fix --quiet \"{}\"'"
 alias tlint="re-store eslint --config=./.i18n.eslintrc.js --no-eslintrc --ext=json shared/i18n/translations islands/studio/frontend/i18n/translations --fix"
 alias dlints="diva docker-compose run re-store-tools eslint --ext js,ts,tsx --fix --rule 'import/no-extraneous-dependencies: off' --rule '@typescript-eslint/no-floating-promises: off' islands/studio/frontend"
 alias dlintb="diva docker-compose run re-store-tools eslint --ext js,ts,tsx --fix --rule 'import/no-extraneous-dependencies: off' islands/studio/backend"
 alias dtsc="diva docker-compose run --rm xstudio-frontend yarn tsc"
 alias dtscb="diva docker-compose run --rm xstudio-backend yarn tsc"
-alias dtest="diva docker-compose run --rm xstudio-frontend yarn test"
+alias dtest="diva docker-compose run --rm xstudio-frontend yarn jest"
 alias dtestb="diva docker-compose run --rm xstudio-backend yarn test"
 
 alias dbb="diva ./diva bb"

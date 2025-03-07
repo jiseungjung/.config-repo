@@ -67,5 +67,6 @@ null_ls.setup({
 
 vim.keymap.set("n", "<leader>c", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format({ timeout_ms })
+    local bufnr = vim.api.nvim_get_current_buf()
+    async_formatting(bufnr)
 end)
