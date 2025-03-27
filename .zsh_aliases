@@ -36,25 +36,25 @@ alias cdc="cd ~/PrintBear/diva/re-store/islands/core"
 alias cdcn="cd ~/PrintBear/diva/re-store/islands/studio/frontend/lib/crayon"
 
 # Docker
-alias dc="diva docker-compose"
-alias dr="diva docker-compose run --rm"
+alias dc="diva docker compose"
+alias dr="dc run --rm"
 
-# docker-compose up
-alias dsup="diva docker-compose up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
-alias dsupl="diva docker-compose up -d artisan delorean core-frontend core-backend internal-auth-frontend studio-frontend studio-backend flag && diva docker-compose up xstudio-frontend xstudio-backend bridge-backend store"
-alias dtup="diva docker-compose up -d ai-endpoint-trace-inspyrenet trace ai-endpoint-nsfw-detector nsfw-detector flag"
-alias dbuild="diva docker-compose up -d --build --force-recreate"
+# docker compose up
+alias dsup="dc up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
+alias dsupl="dc up -d artisan delorean core-frontend core-backend internal-auth-frontend studio-frontend studio-backend flag && diva docker compose up xstudio-frontend xstudio-backend bridge-backend store"
+alias dtup="dc up -d ai-endpoint-trace-inspyrenet trace ai-endpoint-nsfw-detector nsfw-detector flag"
+alias dbuild="dc up -d --build --force-recreate"
 
 # Eslint
-alias gitlint="git diff --name-only --diff-filter=ACM | grep '\.js\|\.jsx\|\.ts\|\.tsx$' | xargs -I {} sh -c 'cd \$(git rev-parse --show-toplevel) && eslint --fix --quiet \"{}\"'"
-alias tlint="re-store eslint --config=./.i18n.eslintrc.js --no-eslintrc --ext=json shared/i18n/translations islands/studio/frontend/i18n/translations --fix"
-alias dlint="diva docker-compose run re-store-tools eslint --ext js,ts,tsx --fix --quiet"
+alias glint="git diff --cached --name-only | xargs dr --no-TTY re-store-tools eslint --fix --quiet"
+alias dlint="dr re-store-tools eslint --ext js,ts,tsx --fix --quiet"
+alias tlint="re-store eslint --config=./.i18n.eslintrc.js --no-eslintrc --ext=json shared/i18n/translations islands/xstudio/frontend/i18n/translations --fix"
 
 # Tests
-alias dtsc="diva docker-compose run --rm xstudio-frontend yarn tsc"
-alias dtscb="diva docker-compose run --rm xstudio-backend yarn tsc"
-alias dtest="diva docker-compose run --rm xstudio-frontend yarn jest"
-alias dtestb="diva docker-compose run --rm xstudio-backend yarn test"
+alias dtsc="dr xstudio-frontend yarn tsc"
+alias dtscb="dr xstudio-backend yarn tsc"
+alias dtest="dr xstudio-frontend yarn jest"
+alias dtestb="dr xstudio-backend yarn test"
 
 # Functions
 function diva() {
