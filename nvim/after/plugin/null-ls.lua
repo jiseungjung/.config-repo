@@ -2,8 +2,7 @@ local null_ls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local timeout_ms = 5000
 local excluded_paths = {
-    "re%-store/shared/crayon",
-    "re%-store/islands/xstudio/backend",
+    "re%-store/shared/crayon"
 }
 
 local async_formatting = function(bufnr)
