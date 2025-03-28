@@ -26,6 +26,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "/usr/local/go/bin" ] ; then
+    PATH="/usr/local/go/bin:$PATH"
+fi
+
+
 if [ -d "/usr/libexec/docker/cli-plugins" ] ; then
     PATH="/usr/libexec/docker/cli-plugins:$PATH"
 fi
