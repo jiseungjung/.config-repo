@@ -3,10 +3,9 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-  'tsserver',
-  'sumneko_lua',
+  'ts_ls',
+  'lua_ls',
 })
-
 
 local function filter(arr, fn)
   if type(arr) ~= "table" then
@@ -28,7 +27,7 @@ local function filterReactDTS(value)
 end
 
 -- Fix multiple definitions for react
-lsp.configure('tsserver', {
+lsp.configure('ts_ls', {
   handlers = {
     ['textDocument/definition'] = function(err, result, method, ...)
       if vim.tbl_islist(result) and #result > 1 then
@@ -42,7 +41,7 @@ lsp.configure('tsserver', {
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {

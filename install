@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-mkdir -p ~/.config/nvim/plugin
-mkdir -p ~/.config/nvim/after/plugin
-mkdir -p ~/.config/nvim/lua/jiseung
-
 # Link dotfiles
 DOTFILES=( .profile .tmux.conf .zsh_aliases .zshrc )
 CONFIG_REPO=~/.config-repo
@@ -15,22 +11,7 @@ for file in "${DOTFILES[@]}"; do
 done
 
 # Link Neovim
-REPO_NVIM=${CONFIG_REPO}/nvim
-TARGET_NVIM=~/.config/nvim
-REGEX=".*\.(vim|lua|json)$"
-
-cd "$REPO_NVIM" || { echo "Cannot cd into ${REPO_NVIM}"; exit 1; }
-
-if [[ "$OSTYPE" == "darwin"* ]]; then # For macOS
-    FILES=$(find -E . -regex "$REGEX")
-elif [[ "$OSTYPE" == "linux"* ]]; then
-    FILES=$(find . -regextype posix-extended -regex "$REGEX")
-fi
-
-for file in $FILES; do
-    rm -rf "${TARGET_NVIM}/${file}"
-    ln -s "${REPO_NVIM}/${file}" "${TARGET_NVIM}/${file}"
-    echo "Linked: ${TARGET_NVIM}/${file}"
-done
+ln -sf "${CONFIG_REPO}/nvim" ~/.config/nvim
+echo "Linked: ~/.config/nvim"
 
 echo "Installed"
