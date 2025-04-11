@@ -35,11 +35,6 @@ if [ -d "/usr/libexec/docker/cli-plugins" ] ; then
     PATH="/usr/libexec/docker/cli-plugins:$PATH"
 fi
 
-# Check if the shell is interactive before starting tmux
-if [[ -z "$TMUX" && -n "$PS1" ]]; then
-    exec tmux
-fi
-
 # Add Yarn global bin to PATH if Yarn is installed
 if command -v yarn &>/dev/null; then
     PATH="$(yarn global bin):$PATH"

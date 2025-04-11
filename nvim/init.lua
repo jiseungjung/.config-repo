@@ -1,6 +1,6 @@
 -- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+--  See `:help mapleader`
+--   NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -8,7 +8,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
--- See `:help vim.opt`
+--  See `:help vim.opt`
 
 -- Make line numbers default
 vim.opt.number = true
@@ -67,9 +67,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- If performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
+--  See `:help 'confirm'`
 --  FIXME: Look into this later
 vim.opt.confirm = true
 
@@ -80,18 +80,65 @@ vim.opt.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Escape terminal insert mode
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Escape Terminal Insert Mode' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- NOTE: remap = true lets your keymap re-map into an existing mapping
+vim.keymap.set('n', '<C-k>', '[d', { desc = 'Jump to previous diagnostic', remap = true })
+vim.keymap.set('n', '<C-j>', ']d', { desc = 'Jump to next diagnostic', remap = true })
 
--- Keybinds to make split window easier.
-vim.keymap.set('n', '<leader>sl', '<C-w><C-v>', { desc = 'Split window vertically' })
-vim.keymap.set('n', '<leader>sj', '<C-w><C-s>', { desc = 'Split window horizontally' })
+-- Source this file
+vim.keymap.set('n', '<leader>sv', '<cmd>source $MYVIMRC<CR>', { desc = 'Source vimrc' })
 
--- Keybinds to make split navigation easier.
-vim.keymap.set('n', '<leader>h', '<C-w><C-h>', { desc = 'Go to the left window' })
-vim.keymap.set('n', '<leader>l', '<C-w><C-l>', { desc = 'Go to the right window' })
-vim.keymap.set('n', '<leader>j', '<C-w><C-j>', { desc = 'Go to the lower window' })
-vim.keymap.set('n', '<leader>k', '<C-w><C-k>', { desc = 'Go to the upper window' })
+-- Keymaps to make split window easier.
+vim.keymap.set('n', '<leader>wl', function()
+  vim.cmd 'vsplit'
+end, { desc = 'Open window to the right' })
+vim.keymap.set('n', '<leader>wj', function()
+  vim.cmd 'split'
+end, { desc = 'Open window below' })
+vim.keymap.set('n', '<leader>wh', function()
+  vim.opt.splitright = false
+  vim.cmd 'vsplit'
+  vim.opt.splitright = true
+end, { desc = 'Open window to the left' })
+vim.keymap.set('n', '<leader>wk', function()
+  vim.opt.splitbelow = false
+  vim.cmd 'split'
+  vim.opt.splitbelow = true
+end, { desc = 'Open window above' })
+
+-- Keymaps to open terminal
+vim.keymap.set('n', '<leader>tl', function()
+  vim.cmd 'vsplit | terminal'
+end, { desc = 'Open terminal to the right' })
+vim.keymap.set('n', '<leader>tj', function()
+  vim.cmd 'split | terminal'
+end, { desc = 'Open terminal below' })
+vim.keymap.set('n', '<leader>th', function()
+  vim.opt.splitright = false
+  vim.cmd 'vsplit | terminal'
+  vim.opt.splitright = true
+end, { desc = 'Open terminal to the left' })
+vim.keymap.set('n', '<leader>tk', function()
+  vim.opt.splitbelow = false
+  vim.cmd 'split | terminal'
+  vim.opt.splitbelow = true
+end, { desc = 'Open terminal above' })
+
+-- Keymaps to make split navigation easier.
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Go to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Go to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Go to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Go to the upper window' })
+
+-- When in terminal mode, Ctrl-h/l/j/k will move between windows
+vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true, desc = 'Go to the left window from terminal' })
+vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]], { noremap = true, silent = true, desc = 'Go to the right window from terminal' })
+vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]], { noremap = true, silent = true, desc = 'Go to the lower window from terminal' })
+vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]], { noremap = true, silent = true, desc = 'Go to the upper window from terminal' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -115,6 +162,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Automatically enter Insert Mode when entering a terminal
+vim.api.nvim_create_autocmd({ 'TermOpen', 'BufWinEnter', 'TermEnter', 'WinEnter' }, {
+  callback = function()
+    if vim.bo.buftype == 'terminal' then
+      vim.cmd 'startinsert'
+    end
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager if not already installed ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -131,13 +187,12 @@ vim.opt.rtp:prepend(lazypath)
 --  To check the current status of your plugins, run :Lazy
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  -- NOTE: Plugins can also be added by using a table,
+  -- NOTE: Plugins can also be added by using a table({}),
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
-
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
@@ -148,9 +203,6 @@ require('lazy').setup({
   --            })
   --        end,
   --    }
-  --
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -170,17 +222,9 @@ require('lazy').setup({
   --
   -- This is often very useful to both group configuration, as well as handle
   -- lazy loading plugins that don't need to be loaded immediately at startup.
-  --
-  -- For example, in the following configuration, we use:
-  --  event = 'VimEnter'
-  --
-  -- which loads which-key before all the UI elements are loaded. Events can be
-  -- normal autocommands events (`:help autocmd-events`).
-  --
-  -- Then, because we use the `opts` key (recommended), the configuration runs
-  -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
+  --  See :help autocmd-events
 
-  { -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keymaps.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
@@ -268,13 +312,6 @@ require('lazy').setup({
       -- it can fuzzy find! It's more than just a "file finder", it can search
       -- many different aspects of Neovim, your workspace, LSP, and more!
       --
-      -- The easiest way to use Telescope, is to start by doing something like:
-      --  :Telescope help_tags
-      --
-      -- After running this command, a window will open up and you're able to
-      -- type in the prompt window. You'll see a list of `help_tags` options and
-      -- a corresponding preview of the help.
-      --
       -- Two important keymaps to use while in Telescope are:
       --  - Insert mode: <c-/>
       --  - Normal mode: ?
@@ -288,13 +325,16 @@ require('lazy').setup({
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = { -- 'i' means Insert mode
+              ['<C-j>'] = require('telescope.actions').move_selection_next,
+              ['<C-k>'] = require('telescope.actions').move_selection_previous,
+            },
+          },
+        },
         -- pickers = {}
+        -- FIXME: Look into this later
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -323,7 +363,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
           previewer = false,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
