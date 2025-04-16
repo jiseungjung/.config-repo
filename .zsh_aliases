@@ -47,7 +47,7 @@ alias dtup="dc up -d ai-endpoint-trace-inspyrenet trace ai-endpoint-nsfw-detecto
 alias dbuild="dc up -d --build --force-recreate"
 
 # Eslint
-alias glint="re-store bash -c 'git diff --cached --name-only | grep -E \"\.(js|ts|tsx)$\" | xargs docker compose run --rm --no-TTY re-store-tools eslint --fix --quiet'"
+alias glint="re-store bash -c 'git diff --cached --name-only | grep -E \"\.(js|ts|tsx)$\" | grep -v \"/generated/\" | xargs docker compose run --rm --no-TTY re-store-tools eslint --fix --quiet'"
 alias dlint="dr re-store-tools eslint --ext js,ts,tsx --fix --quiet"
 alias tlint="re-store eslint --config=./.i18n.eslintrc.js --no-eslintrc --ext=json shared/i18n/translations islands/xstudio/frontend/i18n/translations --fix"
 
