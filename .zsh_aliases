@@ -29,10 +29,8 @@ alias dpsql="diva ./diva postgres"
 # Change directory
 alias cdd="cd ~/PrintBear/diva"
 alias cdrs="cd ~/PrintBear/diva/re-store"
-alias cds="cd ~/PrintBear/diva/re-store/islands/studio/frontend"
-alias cdsb="cd ~/PrintBear/diva/re-store/islands/studio/backend"
-alias cdx="cd ~/PrintBear/diva/re-store/islands/xstudio/frontend"
-alias cdxb="cd ~/PrintBear/diva/re-store/islands/xstudio/backend"
+alias cds="cd ~/PrintBear/diva/re-store/islands/studio"
+alias cdx="cd ~/PrintBear/diva/re-store/islands/xstudio"
 alias cdc="cd ~/PrintBear/diva/re-store/islands/core"
 alias cdcn="cd ~/PrintBear/diva/re-store/islands/studio/frontend/lib/crayon"
 
