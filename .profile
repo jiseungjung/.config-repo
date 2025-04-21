@@ -8,37 +8,33 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
+# If running bash source .bashrc if it exists
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+        source "$HOME/.bashrc"
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
+# Set PATH
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# go
 if [ -d "/usr/local/go/bin" ] ; then
     PATH="/usr/local/go/bin:$PATH"
 fi
 
-if [ -d "/usr/local/go/bin" ] ; then
-    PATH="/usr/local/go/bin:$PATH"
-fi
-
+# neovim
 if [ -d "/opt/nvim-linux-x86_64/bin" ] ; then
     PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 fi
 
-# Add Yarn global bin to PATH if Yarn is installed
-if command -v yarn &>/dev/null; then
-    PATH="$(yarn global bin):$PATH"
+# yarn
+if [ -d "$HOME/.yarn/bin" ] ; then
+    PATH="$HOME/.yarn/bin:$PATH"
 fi
