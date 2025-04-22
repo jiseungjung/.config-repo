@@ -3,6 +3,13 @@ if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 fi
 
+# Configure pager behavior (e.g. for git diff, man)
+# Default behavior: LESS=FRX
+# 'F': Quit if output fits on one screen
+# 'R': Enable ANSI color codes
+# 'X': Prevent clearing screen after quitting (remove for clean prompt)
+export LESS=R
+
 # Load additional profile and aliases
 [ -f ~/.profile ] && source ~/.profile
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases

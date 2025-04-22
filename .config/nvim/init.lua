@@ -5,7 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 --  See `:help vim.opt`
@@ -92,26 +92,49 @@ vim.keymap.set('n', '<leader>d', function()
   })
 end, { desc = 'Show diagnostic under cursor' })
 
--- NOTE: remap = true lets your keymap re-map into an existing mapping
-vim.keymap.set('n', '<C-k>', '[d', { desc = 'Jump to previous diagnostic', remap = true })
-vim.keymap.set('n', '<C-j>', ']d', { desc = 'Jump to next diagnostic', remap = true })
+-- Open Oil
+vim.keymap.set('n', '<leader>e', ':Oil<CR>', { desc = 'Open parent directory' })
 
--- Keymap to make toggling comments more intuitive.
-vim.keymap.set('n', '<C-_>', 'gcc', { desc = 'Toggle comment line', remap = true })
-vim.keymap.set('x', '<C-_>', 'gc', { desc = 'Toggle comment selection', remap = true })
+-- Keymaps to open Oil in a split window
+vim.keymap.set('n', '<leader>el', function()
+  vim.cmd.vsplit()
+  require('oil').open()
+end, { desc = 'Open Oil to the right' })
 
--- Keymaps to make split window easier.
+vim.keymap.set('n', '<leader>ej', function()
+  vim.cmd.split()
+  require('oil').open()
+end, { desc = 'Open Oil below' })
+
+vim.keymap.set('n', '<leader>eh', function()
+  vim.opt.splitright = false
+  vim.cmd.vsplit()
+  require('oil').open()
+  vim.opt.splitright = true
+end, { desc = 'Open Oil to the left' })
+
+vim.keymap.set('n', '<leader>ek', function()
+  vim.opt.splitbelow = false
+  vim.cmd.split()
+  require('oil').open()
+  vim.opt.splitbelow = true
+end, { desc = 'Open Oil above' })
+
+-- Keymaps to split window
 vim.keymap.set('n', '<leader>wl', function()
   vim.cmd 'vsplit'
 end, { desc = 'Open window to the right' })
+
 vim.keymap.set('n', '<leader>wj', function()
   vim.cmd 'split'
 end, { desc = 'Open window below' })
+
 vim.keymap.set('n', '<leader>wh', function()
   vim.opt.splitright = false
   vim.cmd 'vsplit'
   vim.opt.splitright = true
 end, { desc = 'Open window to the left' })
+
 vim.keymap.set('n', '<leader>wk', function()
   vim.opt.splitbelow = false
   vim.cmd 'split'
@@ -122,21 +145,24 @@ end, { desc = 'Open window above' })
 vim.keymap.set('n', '<leader>tl', function()
   vim.cmd 'vsplit | terminal'
 end, { desc = 'Open terminal to the right' })
+
 vim.keymap.set('n', '<leader>tj', function()
   vim.cmd 'split | terminal'
 end, { desc = 'Open terminal below' })
+
 vim.keymap.set('n', '<leader>th', function()
   vim.opt.splitright = false
   vim.cmd 'vsplit | terminal'
   vim.opt.splitright = true
 end, { desc = 'Open terminal to the left' })
+
 vim.keymap.set('n', '<leader>tk', function()
   vim.opt.splitbelow = false
   vim.cmd 'split | terminal'
   vim.opt.splitbelow = true
 end, { desc = 'Open terminal above' })
 
--- Keymaps to make split navigation easier.
+-- Keymaps to make split navigation easier
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Go to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Go to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Go to the lower window' })
@@ -200,12 +226,20 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  { 'nvim-tree/nvim-web-devicons', opts = {} },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
     ---@type oil.SetupOpts
-    opts = {},
+    opts = {
+      keymaps = {
+        ['<C-h>'] = false, -- disable Ctrl+h
+        ['<C-l>'] = false, -- disable Ctrl+l
+      },
+      view_options = {
+        -- Show files and directories that start with "."
+        show_hidden = true,
+      },
+    },
     -- Optional dependencies
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
@@ -369,10 +403,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         defaults = {
           mappings = {
-            i = { -- 'i' means Insert mode
-              ['<C-j>'] = require('telescope.actions').move_selection_next,
-              ['<C-k>'] = require('telescope.actions').move_selection_previous,
-            },
+            i = {}, -- 'i' means Insert mode
           },
         },
         -- pickers = {}
@@ -688,7 +719,8 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        typescript = { 'eslint_d' }, -- ts
+        typescriptreact = { 'eslint_d' }, --tsx
       },
     },
   },
