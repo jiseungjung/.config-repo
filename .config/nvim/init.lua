@@ -93,7 +93,7 @@ vim.keymap.set('n', '<leader>d', function()
 end, { desc = 'Show diagnostic under cursor' })
 
 -- Open Oil
-vim.keymap.set('n', '<leader>e', ':Oil<CR>', { desc = 'Open parent directory' })
+vim.keymap.set('n', '-', ':Oil<CR>', { desc = 'Open parent directory' })
 
 -- Keymaps to open Oil in a split window
 vim.keymap.set('n', '<leader>el', function()
@@ -226,9 +226,6 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  --
-  -- You can use any of the following easing functions: linear, quadratic, cubic, quartic, quintic, circular, sine
-  { 'karb94/neoscroll.nvim', opts = { easing = 'sine' } },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
@@ -258,7 +255,8 @@ require('lazy').setup({
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-      rename = { enabled = true },
+      scroll = {},
+      rename = {},
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {
