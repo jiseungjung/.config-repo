@@ -18,6 +18,9 @@ export LESS=R
 [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# History config - needed for zsh-autosuggestions
+HISTFILE=~/.zsh_history
+
 # Redraw the prompt correctly when the keymap changes.
 # Fixes prompts disappearing when switching to vi mode.
 function zle-keymap-select {
