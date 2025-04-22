@@ -226,6 +226,9 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
+  --
+  -- You can use any of the following easing functions: linear, quadratic, cubic, quartic, quintic, circular, sine
+  { 'karb94/neoscroll.nvim', opts = { easing = 'sine' } },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
@@ -481,7 +484,13 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {
+        notification = {
+          window = {
+            winblend = 0,
+          },
+        },
+      } },
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
