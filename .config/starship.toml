@@ -1,0 +1,34 @@
+# Inserts a blank line between shell prompts
+add_newline=false
+
+format="""
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$nodejs\
+$docker_context\
+$line_break\
+$character"""
+
+[directory]
+truncation_length=1
+
+[git_branch]
+format='[$symbol$branch(:$remote_branch)]($style) '
+symbol=''
+
+[git_status]
+format="""
+([\
+$ahead_behind\
+$conflicted\
+$untracked\
+$modified\
+$staged\
+$renamed\
+$deleted\
+]($style))"""
+
+[fill]
+symbol=' '

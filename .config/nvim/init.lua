@@ -85,6 +85,13 @@ vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Escape Terminal Insert Mo
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>d', function()
+  vim.diagnostic.open_float(nil, {
+    scope = 'cursor',
+    focus = false,
+  })
+end, { desc = 'Show diagnostic under cursor' })
+
 -- NOTE: remap = true lets your keymap re-map into an existing mapping
 vim.keymap.set('n', '<C-k>', '[d', { desc = 'Jump to previous diagnostic', remap = true })
 vim.keymap.set('n', '<C-j>', ']d', { desc = 'Jump to next diagnostic', remap = true })

@@ -10,8 +10,12 @@ for file in "${DOTFILES[@]}"; do
   echo "Linked: ${file}"
 done
 
-# Link Neovim
-ln -sf "${CONFIG_REPO}/nvim" ~/.config/nvim
-echo "Linked: ~/.config/nvim"
+# Config files inside ~/.config/
+CONFIG_ITEMS=( ghostty starship.toml nvim )
+
+for item in "${CONFIG_ITEMS[@]}"; do
+  ln -sf "${CONFIG_REPO}/.config/${item}" ~/.config/"${item}"
+  echo "Linked: ~/.config/${item}"
+done
 
 echo "Installed"
