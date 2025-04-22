@@ -5,9 +5,6 @@ format="""
 $directory\
 $git_branch\
 $git_status\
-$fill\
-$nodejs\
-$docker_context\
 $line_break\
 $character"""
 

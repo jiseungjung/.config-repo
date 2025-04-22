@@ -8,7 +8,7 @@ alias v="nvim"
 alias tree="tree -I node_modules"
 
 # Git
-alias gaa='git add -a'
+alias gaa='git add --all'
 alias gc='git commit'
 alias gca="git commit -a"
 alias gcax='git add ~/PrintBear/diva/re-store/islands/xstudio/ && git commit ~/PrintBear/diva/re-store/islands/xstudio/'

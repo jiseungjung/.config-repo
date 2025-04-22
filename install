@@ -1,8 +1,43 @@
 #!/usr/bin/env bash
+# Exit the script if a command fails
 set -e
 
+# FIXME: Installing tools are not tested. Remove this comment after testing
+#
+# Install Neovim if not found
+if [ ! -f /opt/nvim-linux-x86_64/bin/nvim ]; then
+  echo "Installing Neovim (latest release)..."
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+  sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+  rm nvim-linux-x86_64.tar.gz
+fi
+
+# Install Ghostty if not found (Ubuntu)
+if ! command -v ghostty &> /dev/null; then
+  echo "Installing Ghostty..."
+  curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh | bash
+fi
+
+# Install Starship if not found
+if ! command -v starship &> /dev/null; then
+  echo "Installing Starship..."
+  curl -sS https://starship.rs/install.sh | sh
+fi
+
+# Install zsh-autosuggestions
+if [ ! -d "$HOME/.zsh/zsh-autosuggestions" ]; then
+  echo "Installing zsh-autosuggestions..."
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
+fi
+
+# Install zsh-syntax-highlighting
+if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
+  echo "Installing zsh-syntax-highlighting..."
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
+fi
+
 # Link dotfiles
-DOTFILES=( .profile .tmux.conf .zsh_aliases .zshrc )
+DOTFILES=( .profile .zshrc .zsh_aliases )
 CONFIG_REPO=~/.config-repo
 
 for file in "${DOTFILES[@]}"; do
@@ -11,11 +46,11 @@ for file in "${DOTFILES[@]}"; do
 done
 
 # Config files inside ~/.config/
-CONFIG_ITEMS=( ghostty starship.toml nvim )
+CONFIG_ITEMS=( nvim ghostty starship.toml )
 
 for item in "${CONFIG_ITEMS[@]}"; do
-  ln -sf "${CONFIG_REPO}/.config/${item}" ~/.config/"${item}"
+  ln -snfT "${CONFIG_REPO}/.config/${item}" ~/.config/"${item}"
   echo "Linked: ~/.config/${item}"
 done
 
-echo "Installed"
+echo "✅ Installed"
