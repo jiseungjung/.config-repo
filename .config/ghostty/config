@@ -4,6 +4,9 @@ background-opacity = 0.5
 window-padding-balance = true
 
 ## Keybindings
+# Close the current "surface", whether that is a window, tab, split, etc.
+keybind = ctrl+shift+w=close_surface
+
 # Splits
 keybind = ctrl+shift+h=new_split:left
 keybind = ctrl+shift+l=new_split:right
