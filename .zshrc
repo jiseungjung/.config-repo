@@ -25,6 +25,10 @@ fi
 
 # History config - needed for zsh-autosuggestions
 HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 
 # Redraw the prompt correctly when the keymap changes.
 # Fixes prompts disappearing when switching to vi mode.
