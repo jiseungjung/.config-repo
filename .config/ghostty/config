@@ -1,5 +1,5 @@
 ## Options
-theme = tokyonight
+theme = TokyoNight
 background-opacity = 0.8
 window-padding-balance = true
 
@@ -22,3 +22,4 @@ keybind = alt+j=goto_split:down
 # Misc
 keybind = ctrl+shift+s=write_scrollback_file:paste
 keybind = f11=toggle_fullscreen
+keybind = ctrl+shift+r=prompt_surface_title

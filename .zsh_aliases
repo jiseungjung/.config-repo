@@ -49,9 +49,10 @@ alias dpsql="diva ./diva postgres"
 # Change directory
 alias cdd="cd ~/PrintBear/diva"
 alias cdrs="cd ~/PrintBear/diva/re-store"
-alias cds="cd ~/PrintBear/diva/re-store/islands/studio"
+alias cds="cd ~/PrintBear/diva/re-store/islands/social"
 alias cdx="cd ~/PrintBear/diva/re-store/islands/xstudio"
 alias cdc="cd ~/PrintBear/diva/re-store/islands/core"
+alias cdb="cd ~/PrintBear/diva/re-store/islands/bridge"
 alias cdcn="cd ~/PrintBear/diva/re-store/islands/studio/frontend/lib/crayon"
 
 # Docker
@@ -59,8 +60,10 @@ alias dc="diva docker compose"
 alias dr="dc run --rm"
 
 # docker compose up
-alias dsup="dc up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
-alias dsupl="dc up -d artisan delorean core-frontend core-backend internal-auth-frontend studio-frontend studio-backend flag && diva docker compose up xstudio-frontend xstudio-backend bridge-backend store"
+alias dsup="dc up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend social-frontend social-backend flag tools-frontend tools-backend"
+alias dsupl="dc up -d artisan delorean core-frontend core-backend internal-auth-frontend flag && diva docker compose up social-frontend social-backend bridge-backend store"
+alias dstup="dc up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
+alias dstupl="dc up -d artisan delorean core-frontend core-backend internal-auth-frontend studio-frontend studio-backend flag && diva docker compose up xstudio-frontend xstudio-backend bridge-backend store"
 alias dtup="dc up -d ai-endpoint-trace-inspyrenet trace ai-endpoint-nsfw-detector nsfw-detector flag"
 alias dbuild="dc up -d --build --force-recreate"
 
