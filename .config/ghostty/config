@@ -19,6 +19,8 @@ keybind = alt+l=goto_split:right
 keybind = alt+k=goto_split:up
 keybind = alt+j=goto_split:down
 
+keybind = ctrl+shift+e=equalize_splits
+
 # Misc
 keybind = ctrl+shift+s=write_scrollback_file:paste
 keybind = f11=toggle_fullscreen

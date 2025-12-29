@@ -59,24 +59,25 @@ alias cdcn="cd ~/PrintBear/diva/re-store/islands/studio/frontend/lib/crayon"
 alias dc="diva docker compose"
 alias dr="dc run --rm"
 
+extra_services="artisan delorean core-frontend home-frontend internal-auth-frontend flag tools-frontend tools-backend invoices-frontend invoices-backend"
+services="store bridge-backend core-backend social-frontend social-backend"
+
 # docker compose up
-alias dsup="dc up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend social-frontend social-backend flag tools-frontend tools-backend"
-alias dsupl="dc up -d artisan delorean core-frontend core-backend internal-auth-frontend flag && diva docker compose up social-frontend social-backend bridge-backend store"
-alias dstup="dc up -d store artisan delorean bridge-backend home-frontend core-frontend core-backend internal-auth-frontend studio-frontend studio-backend xstudio-frontend xstudio-backend flag"
-alias dstupl="dc up -d artisan delorean core-frontend core-backend internal-auth-frontend studio-frontend studio-backend flag && diva docker compose up xstudio-frontend xstudio-backend bridge-backend store"
+alias dcup="eval dc up -d \$services \$extra_services"
+alias dcupl="eval dc up \$services '&&' dc up -d \$extra_services"
 alias dtup="dc up -d ai-endpoint-trace-inspyrenet trace ai-endpoint-nsfw-detector nsfw-detector flag"
 alias dbuild="dc up -d --build --force-recreate"
 
 # Eslint
 alias glint="re-store bash -c 'git diff --cached --name-only | grep -E \"\.(js|ts|tsx)$\" | grep -v \"/generated/\" | xargs docker compose run --rm --no-TTY re-store-tools eslint --fix --quiet'"
 alias dlint="dr re-store-tools eslint --ext js,ts,tsx --fix --quiet"
-alias tlint="re-store eslint --config=./.i18n.eslintrc.js --no-eslintrc --ext=json shared/i18n/translations islands/xstudio/frontend/i18n/translations --fix"
+alias tlint="re-store eslint --config=./.i18n.eslintrc.js --no-eslintrc --ext=json shared/i18n/translations islands/social/frontend/i18n/translations --fix"
 
 # Tests
-alias dtsc="dr xstudio-frontend yarn tsc"
-alias dtscb="dr xstudio-backend yarn tsc"
-alias dtest="dr xstudio-frontend yarn jest"
-alias dtestb="dr xstudio-backend yarn test"
+alias dtsc="dr social-frontend yarn tsc"
+alias dtscb="dr social-backend yarn tsc"
+alias dtest="dr social-frontend yarn test"
+alias dtestb="dr social-backend yarn test"
 
 # Functions
 function diva() {

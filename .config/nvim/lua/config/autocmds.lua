@@ -28,3 +28,9 @@ vim.api.nvim_create_autocmd({ 'TermOpen', 'BufWinEnter', 'TermEnter', 'WinEnter'
     end
   end,
 })
+
+-- Equalize window dimensions when resizing Neovim window
+vim.api.nvim_create_autocmd('VimResized', {
+  pattern = '*',
+  command = 'wincmd =',
+})
