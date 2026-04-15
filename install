@@ -36,7 +36,7 @@ if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
 fi
 
-# Link items into home
+# Link files and directories into home
 HOME_ITEMS=( .profile .zshrc .zsh_aliases .claude )
 CONFIG_REPO=~/.config-repo
 
@@ -48,7 +48,7 @@ for item in "${HOME_ITEMS[@]}"; do
   echo "Linked: ${item}"
 done
 
-# Link items into ~/.config
+# Link files and directories into ~/.config
 CONFIG_ITEMS=( nvim ghostty starship.toml )
 
 for item in "${CONFIG_ITEMS[@]}"; do
