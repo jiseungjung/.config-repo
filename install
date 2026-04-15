@@ -2,8 +2,12 @@
 # Exit the script if a command fails
 set -e
 
+CONFIG_REPO=~/.config-repo
+
+# ── Install tools ────────────────────────────────────────────────────────────
+
 # FIXME: Installing tools are not tested. Remove this comment after testing
-#
+
 # Install Neovim if not found
 if [ ! -f /opt/nvim-linux-x86_64/bin/nvim ]; then
   echo "Installing Neovim (latest release)..."
@@ -36,12 +40,12 @@ if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
 fi
 
-CONFIG_REPO=~/.config-repo
+# ── Link files and directories into home ─────────────────────────────────────
 
-# Link files and directories into home
-HOME_ITEMS=( .profile .zshrc .zsh_aliases .claude )
+HOME_ITEMS=( .profile .zshrc .zsh_aliases )
 
 for item in "${HOME_ITEMS[@]}"; do
+  # Remove if it's a real directory, not a symlink (symlinks are replaced by ln -snfT)
   if [ -d ~/"${item}" ] && [ ! -L ~/"${item}" ]; then
     rm -rf ~/"${item}"
   fi
@@ -49,15 +53,34 @@ for item in "${HOME_ITEMS[@]}"; do
   echo "Linked: ${item}"
 done
 
-# Link files and directories into ~/.config
+# ── Link files and directories into ~/.config ─────────────────────────────────
+
 CONFIG_ITEMS=( nvim ghostty starship.toml )
 
 for item in "${CONFIG_ITEMS[@]}"; do
+  # Remove if it's a real directory, not a symlink (symlinks are replaced by ln -snfT)
   if [ -d ~/.config/"${item}" ] && [ ! -L ~/.config/"${item}" ]; then
     rm -rf ~/.config/"${item}"
   fi
   ln -snfT "${CONFIG_REPO}/.config/${item}" ~/.config/"${item}"
   echo "Linked: ~/.config/${item}"
+done
+
+# ── Link Claude config ────────────────────────────────────────────────────────
+
+# Link config files individually to preserve existing ~/.claude contents
+ln -sf "${CONFIG_REPO}/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
+echo "Linked: .claude/CLAUDE.md"
+ln -sf "${CONFIG_REPO}/.claude/settings.json" ~/.claude/settings.json
+echo "Linked: .claude/settings.json"
+
+# Link memory directories for each project, creating the project directory if needed
+for project_dir in "${CONFIG_REPO}/.claude/projects"/*/; do
+  project="${project_dir%/}"
+  project="${project##*/}"
+  mkdir -p ~/.claude/projects/"${project}"
+  ln -snfT "${CONFIG_REPO}/.claude/projects/${project}/memory" ~/.claude/projects/"${project}"/memory
+  echo "Linked: .claude/projects/${project}/memory"
 done
 
 echo "✅ Installed"
