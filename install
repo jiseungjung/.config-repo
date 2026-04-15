@@ -45,6 +45,14 @@ for file in "${DOTFILES[@]}"; do
   echo "Linked: ${file}"
 done
 
+# Directories symlinked directly into home
+HOME_DIRS=( .claude )
+
+for dir in "${HOME_DIRS[@]}"; do
+  ln -snfT "${CONFIG_REPO}/${dir}" ~/"${dir}"
+  echo "Linked: ${dir}"
+done
+
 # Config files inside ~/.config/
 CONFIG_ITEMS=( nvim ghostty starship.toml )
 

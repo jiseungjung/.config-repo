@@ -1,0 +1,11 @@
+*
+.*
+!.gitignore
+!CLAUDE.md
+!settings.json
+!projects/
+projects/*
+!projects/*/
+projects/*/*
+!projects/*/memory/
+!projects/*/memory/**
