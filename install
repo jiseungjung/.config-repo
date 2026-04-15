@@ -49,6 +49,9 @@ done
 HOME_DIRS=( .claude )
 
 for dir in "${HOME_DIRS[@]}"; do
+  if [ -d ~/"${dir}" ] && [ ! -L ~/"${dir}" ]; then
+    rm -rf ~/"${dir}"
+  fi
   ln -snfT "${CONFIG_REPO}/${dir}" ~/"${dir}"
   echo "Linked: ${dir}"
 done
