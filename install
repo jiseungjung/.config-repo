@@ -36,9 +36,10 @@ if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
 fi
 
+CONFIG_REPO=~/.config-repo
+
 # Link files and directories into home
 HOME_ITEMS=( .profile .zshrc .zsh_aliases .claude )
-CONFIG_REPO=~/.config-repo
 
 for item in "${HOME_ITEMS[@]}"; do
   if [ -d ~/"${item}" ] && [ ! -L ~/"${item}" ]; then
