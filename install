@@ -36,24 +36,16 @@ if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
 fi
 
-# Link dotfiles
-DOTFILES=( .profile .zshrc .zsh_aliases )
+# Link home files and directories
+HOME_ITEMS=( .profile .zshrc .zsh_aliases .claude )
 CONFIG_REPO=~/.config-repo
 
-for file in "${DOTFILES[@]}"; do
-  ln -sf "${CONFIG_REPO}/${file}" ~/"${file}"
-  echo "Linked: ${file}"
-done
-
-# Directories symlinked directly into home
-HOME_DIRS=( .claude )
-
-for dir in "${HOME_DIRS[@]}"; do
-  if [ -d ~/"${dir}" ] && [ ! -L ~/"${dir}" ]; then
-    rm -rf ~/"${dir}"
+for item in "${HOME_ITEMS[@]}"; do
+  if [ -d ~/"${item}" ] && [ ! -L ~/"${item}" ]; then
+    rm -rf ~/"${item}"
   fi
-  ln -snfT "${CONFIG_REPO}/${dir}" ~/"${dir}"
-  echo "Linked: ${dir}"
+  ln -snfT "${CONFIG_REPO}/${item}" ~/"${item}"
+  echo "Linked: ${item}"
 done
 
 # Config files inside ~/.config/
