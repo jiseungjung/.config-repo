@@ -60,6 +60,9 @@ done
 CONFIG_ITEMS=( nvim ghostty starship.toml )
 
 for item in "${CONFIG_ITEMS[@]}"; do
+  if [ -d ~/.config/"${item}" ] && [ ! -L ~/.config/"${item}" ]; then
+    rm -rf ~/.config/"${item}"
+  fi
   ln -snfT "${CONFIG_REPO}/.config/${item}" ~/.config/"${item}"
   echo "Linked: ~/.config/${item}"
 done
