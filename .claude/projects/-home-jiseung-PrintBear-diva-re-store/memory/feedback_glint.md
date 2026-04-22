@@ -4,9 +4,9 @@ description: After code changes, remind user to run glint (ESLint fix on staged 
 type: feedback
 originSessionId: 208bfbb7-fef9-42e8-a981-9f8e2ef95a6d
 ---
-Write code that already abides by the project's ESLint rules. After making file changes, stage the changed files and run glint yourself.
+Write code that already abides by the project's ESLint rules. After making file changes, stage the changed files and run glint yourself. Never tell the user to run glint — just run it.
 
-**Why:** `glint` is a shell alias: `git diff --cached --name-only | grep .ts | xargs docker compose run --rm re-store-tools eslint --fix --quiet`. It only lints staged files and runs via Docker. User explicitly asked Claude to run it, not just remind them.
+**Why:** `glint` is a shell alias: `git diff --cached --name-only | grep .ts | xargs docker compose run --rm re-store-tools eslint --fix --quiet`. It only lints staged files and runs via Docker. User explicitly asked Claude to run it silently, not suggest it.
 
 **How to apply:** Follow all ESLint rules from `/.eslintrc.js` when writing files. Key rules to internalize:
 - Import order: builtin → external (@backend, @internal) → internal (@shared, @frontend) → parent → sibling, alphabetical within groups

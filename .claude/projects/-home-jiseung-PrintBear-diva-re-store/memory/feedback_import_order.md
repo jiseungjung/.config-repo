@@ -1,12 +1,12 @@
 ---
 name: Alphabetical import ordering within groups
-description: Within each import group (as defined by ESLint import/order), sort imports alphabetically by path
+description: Sort imports alphabetically by path within each ESLint group — only for new files, never reorder existing files
 type: feedback
+originSessionId: 8130d6b4-8d6f-407c-b12d-dfb5d93ad5d4
 ---
+When writing NEW files, sort imports alphabetically by the full module path within each group. Do NOT reorder imports in existing files being edited.
 
-Within each import section (separated by blank lines per the import/order ESLint rule), sort imports alphabetically by the full module path.
-
-**Why:** User explicitly asked for this convention to be followed consistently.
+**Why:** Reordering existing imports creates noisy diffs and the user did not ask for it.
 
 **How to apply:** The ESLint config defines these groups (each separated by a blank line):
 1. `builtin` — node built-ins (fs, path)
@@ -15,4 +15,4 @@ Within each import section (separated by blank lines per the import/order ESLint
 4. `parent` — `../` imports
 5. `sibling` — `./` imports
 
-Within each group, sort alphabetically by the full path string. Non-scoped packages (e.g. `express`) come before scoped (`@backend`, `@internal`) within the external group.
+Within each group, sort alphabetically by the full path string. Non-scoped packages (e.g. `express`) come before scoped (`@backend`, `@internal`) within the external group. Only apply this when creating a new file from scratch.
