@@ -73,6 +73,8 @@ ln -sf "${CONFIG_REPO}/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
 echo "Linked: .claude/CLAUDE.md"
 ln -sf "${CONFIG_REPO}/.claude/settings.json" ~/.claude/settings.json
 echo "Linked: .claude/settings.json"
+ln -sf "${CONFIG_REPO}/.claude/statusline.sh" ~/.claude/statusline.sh
+echo "Linked: .claude/statusline.sh"
 
 # Link memory directories for each project, creating the project directory if needed
 for project_dir in "${CONFIG_REPO}/.claude/projects"/*/; do
