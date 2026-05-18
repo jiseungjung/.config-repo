@@ -9,3 +9,6 @@
 - [OOM crashes when running dtestb](project_oom_crashes.md) — Chrome+Next.js+Docker exhausts 32GB RAM; Memory Saver enabled 2026-04-08, Options A/B/C available if it recurs
 - [Merge master commit message convention](feedback_merge_master_commit_message.md) — `<islands>/<layers>: Merge master`; be=backend/internal, fe=frontend, *=both
 - [No abbreviated variables](feedback_no_abbreviations.md) — always use full descriptive names, never single-letter or truncated (e.g. `c` for `cents`)
+- [How to check the database](reference_check_db.md) — `diva ./diva postgres` then `\c social_development`
+- [Error handling in scripts vs request handlers](feedback_error_handling_scripts_vs_handlers.md) — scripts log+return on missing data; handlers/libs throw
+- [Readability over DRY](feedback_readability_over_dry.md) — prefer explicit parallel lists over map/index abstractions when the repetition is easier to scan

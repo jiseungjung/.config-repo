@@ -3,6 +3,8 @@
     "type": "command",
     "command": "bash /home/jiseung/.claude/statusline.sh"
   },
-  "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "skipDangerousModePermissionPrompt": true
 }

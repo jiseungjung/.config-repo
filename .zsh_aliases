@@ -54,6 +54,7 @@ alias cdx="cd ~/PrintBear/diva/re-store/islands/xstudio"
 alias cdc="cd ~/PrintBear/diva/re-store/islands/core"
 alias cdb="cd ~/PrintBear/diva/re-store/islands/bridge"
 alias cdcn="cd ~/PrintBear/diva/re-store/islands/studio/frontend/lib/crayon"
+alias cde="cd ~/PrintBear/email-templates"
 
 # Docker
 alias dc="diva docker compose"
