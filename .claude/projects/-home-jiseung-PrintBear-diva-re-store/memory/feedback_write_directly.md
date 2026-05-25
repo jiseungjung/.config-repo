@@ -8,6 +8,8 @@ Always ask for permission before writing or editing files. Do NOT ask for permis
 
 Never commit to git unless the user explicitly asks. Making changes and committing them are separate steps — stop after making the changes.
 
-**Why:** User explicitly said "don't ask for permission that doesn't write anything" — meaning reads and searches should proceed freely, but file writes still need approval. User also said "don't commit unless I say so" after Claude auto-committed config-repo changes.
+When the user says "remember something", update memory immediately — do not just acknowledge it.
 
-**How to apply:** Reads, searches, and bash commands that don't modify files → proceed without asking. File writes and edits → always ask first. Git commits → only when the user explicitly requests it.
+**Why:** User explicitly said "don't ask for permission that doesn't write anything" — meaning reads and searches should proceed freely, but file writes still need approval. User also said "don't commit unless I say so" after Claude auto-committed config-repo changes. User clarified that "remember" means update memory, not just acknowledge.
+
+**How to apply:** Reads, searches, and bash commands that don't modify files → proceed without asking. File writes and edits → always ask first. Git commits → only when the user explicitly requests it. "Remember X" → write/update memory immediately.

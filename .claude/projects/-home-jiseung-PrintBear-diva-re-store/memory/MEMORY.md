@@ -6,9 +6,17 @@
 - [Alphabetical import ordering within groups](feedback_import_order.md) — sort imports alphabetically by path within each ESLint import/order group
 - [Use shared error classes in router files](feedback_router_errors.md) — router handlers import errors from @shared/backend/lib/api/error/errors, not @backend/utils/errors
 - [Run glint after changes](feedback_glint.md) — stage changed files and run glint yourself after every task; never tell the user to run it
+- [Run tlint after translation changes](feedback_tlint.md) — run from `/home/jiseung/PrintBear/diva`; alias expands to re-store eslint with .i18n.eslintrc.js
 - [OOM crashes when running dtestb](project_oom_crashes.md) — Chrome+Next.js+Docker exhausts 32GB RAM; Memory Saver enabled 2026-04-08, Options A/B/C available if it recurs
 - [Merge master commit message convention](feedback_merge_master_commit_message.md) — `<islands>/<layers>: Merge master`; be=backend/internal, fe=frontend, *=both
 - [No abbreviated variables](feedback_no_abbreviations.md) — always use full descriptive names, never single-letter or truncated (e.g. `c` for `cents`)
 - [How to check the database](reference_check_db.md) — `diva ./diva postgres` then `\c social_development`
 - [Error handling in scripts vs request handlers](feedback_error_handling_scripts_vs_handlers.md) — scripts log+return on missing data; handlers/libs throw
 - [Readability over DRY](feedback_readability_over_dry.md) — prefer explicit parallel lists over map/index abstractions when the repetition is easier to scan
+- [Use classnames for conditional classes](feedback_classnames_for_conditional_classes.md) — always use `classNames({ cls: condition })`, never ternaries or template literals for className
+- [muleTheme color token locations](reference_muletheme_colors.md) — lightColors in newThemes/tokens/colors/ is the source of truth; common.ts + overrides/stickermule.ts
+- [Icon color prop usage](feedback_icon_color_prop.md) — set icon color via `color="token.key"` dot-notation string, not style prop or raw hex
+- [File/component conventions](feedback_file_and_component_conventions.md) — helpers at bottom; no nested ternaries (ESLint); single-file components are files not folders
+- [JSDoc required on all exports](feedback_jsdoc_exports.md) — ESLint rule requires JSDoc on every export and a file-level JSDoc comment
+- [Absolute imports always; ./ only for same folder](feedback_import_paths_absolute.md) — use @frontend/ for all cross-folder imports; relative ./ only within the same directory
+- [No Co-Authored-By in commits](feedback_no_coauthor.md) — never add Co-Authored-By: Claude lines to any commit message
